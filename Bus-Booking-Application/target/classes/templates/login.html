@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            flex-shrink: 0;
+        }
+
+        footer {
+            flex-shrink: 0;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #e6f7ff;
+            padding: 20px;
+        }
+
+        .hero-section {
+            background: url('https://source.unsplash.com/1600x900/?bus,travel,light') no-repeat center center;
+            background-size: cover;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding-bottom: 0px;
+        }
+
+        .hero-section h1, .hero-section p {
+            margin: 10px 0;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-label {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* Link style for Don't Have an Account section */
+        .no-account {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .no-account a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .no-account a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="bg-primary text-white p-3" >
+    <div class="container d-flex align-items-center justify-content-between">
+        <a class="d-flex align-items-center text-decoration-none text-white" th:href="@{/home}">
+            <h1 class="m-0">Bus Booking</h1>
+        </a>
+        <a class="btn btn-light" th:href="@{/register}" >Register</a>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main>
+    <div class="hero-section">
+        <h1>Login to Your Account</h1>
+        <p>Access your booking and travel details</p>
+    </div>
+    <div th:if="${param.success}">
+        <div class="alert alert-info d-flex justify-content-center align-items-center" style="padding:0px;margin:0px; ">
+            You have successfully registered in our app!!!!
+        </div>
+    </div>
+
+
+    <!-- Login Form -->
+    <div class="container form-container">
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Invalid Email or Password</div>
+        </div>
+        <form method="post" th:action="@{/login}">
+            <div class="mb-3">
+                <label for="email" class="form-label" >Email Address</label>
+                <input type="email" class="form-control" id="email" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label" >Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <!-- Don't have an account? -->
+        <div class="no-account">
+            <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+        </div>
+    </div>
+</main>
+</body>
+</html>
